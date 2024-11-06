@@ -1,19 +1,16 @@
 package practice.problems;
 
-import java.security.spec.ECField;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-public class Main {
+public class Encoder {
 
     public static void main(String[] args) {
-
-
         String input = "ab19zbk";
-        StringBuilder st = new StringBuilder();
+        String encodedString = encodeString(input);
+        System.out.println("Encoded string: " + encodedString);
+    }
+
+    public static String encodeString(String input) {
+        StringBuilder result = new StringBuilder();
+
         for(char ch: input.toCharArray()){
             if(Character.isLetter(ch)){
                 char shiftedChar = (char) (ch + 3);
@@ -24,14 +21,15 @@ public class Main {
                     shiftedChar = (char) (shiftedChar - 26);
                 }
 
-                st.append(shiftedChar);
+                result.append(shiftedChar);
             }else if(Character.isDigit(ch)){
                 int newShiftedDigit = ((ch - '0') + 3) % 10;
-                st.append(newShiftedDigit);
+                result.append(newShiftedDigit);
             }else {
-                st.append(ch);
+                result.append(ch);
             }
         }
-        System.out.println(st);
+
+        return result.toString();
     }
 }
